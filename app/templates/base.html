@@ -11,6 +11,11 @@
   <body>
     <!-- Content block -->
 
-    {% block content %} {% endblock%}
+    {% block content %}
+      <!-- Navbar block  -->
+      {% block navbar %} 
+        {% include 'navbar.html' %} 
+      {% endblock %} 
+    {% endblock%}
   </body>
 </html>
