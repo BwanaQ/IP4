@@ -1,7 +1,8 @@
-<h1>Hello World</h1>
+{% extends 'base.html'%} 
+{% import 'macros.html' as macro%}
+
 <ul>
-  {% for posts in post %}
-  <li>{{ post.title }}</li>
-  <li>{{ post.body }}</li>
-  {% endfor %}
+  <li>{{quote.author}}</li>
+  <li>{{quote.quote}}</li>
+  <li>{{quote.permalink}}</li>
 </ul>

@@ -1,6 +1,6 @@
 from flask import render_template
 from app import app
-
+from.request import get_quote
 # Views
 
 
@@ -9,15 +9,11 @@ def index():
     '''
     View root page function that returns the index page and its data
     '''
-    posts = [
-        {
-            "title": "Start", "body": "Index Post"
-        },
-        {
-            "title": "Test", "body": "Coding is fun"
-        }
-    ]
-    return render_template('index.html', posts=posts)
+    quote = get_quote()
+    print(quote)
+    title = "Hunja | A personal blog"
+
+    return render_template('index.html', title=title, quote=quote)
 
 
 @app.route('/movie/<int:movie_id>')

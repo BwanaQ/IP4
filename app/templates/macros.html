@@ -1,0 +1,6 @@
+{% macro displayQuote(quote_list)%} {% for quote in quote_list %}
+<li>{{quote.id}}</li>
+<li>{{quote.author}}</li>
+<li>{{quote.quote}}</li>
+<li>{{quote.permalink}}</li>
+{% endfor %} {% endmacro %}
