@@ -7,15 +7,22 @@
     {% else %}
     <title>Welcome to the best Movie Review website</title>
     {% endif %}
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='css/index.css')}}"
+    />
   </head>
   <body>
     <!-- Content block -->
 
     {% block content %}
-      <!-- Navbar block  -->
-      {% block navbar %} 
-        {% include 'navbar.html' %} 
-      {% endblock %} 
-    {% endblock%}
+    <!-- Navbar block  -->
+    {% block navbar %} {% include 'navbar.html' %} {% endblock %} {% endblock%}
   </body>
 </html>
