@@ -1,1 +1,7 @@
 <h1>Hello World</h1>
+<ul>
+  {% for posts in post %}
+  <li>{{ post.title }}</li>
+  <li>{{ post.body }}</li>
+  {% endfor %}
+</ul>
