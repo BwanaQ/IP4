@@ -19,10 +19,11 @@
     />
   </head>
   <body>
-    <!-- Content block -->
-
-    {% block content %}
     <!-- Navbar block  -->
-    {% block navbar %} {% include 'navbar.html' %} {% endblock %} {% endblock%}
+    {% block navbar %}
+      {% include 'navbar.html' %}
+    {% endblock %}
+    <!-- Content block -->
+    {% block content %} {% endblock%}
   </body>
 </html>

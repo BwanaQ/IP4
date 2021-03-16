@@ -1,12 +1,15 @@
-{% extends 'base.html'%} 
- {% import 'macros.html' as macro%} 
-{% block styles %} 
-  {{ super() }}
-  <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}" />
+{% extends 'base.html'%} {% import "bootstrap/wtf.html" as wtf %} {%block
+content%}
+<div class="row">
+  <div class="col-md-4 col-sm-12">{{ wtf.quick_form(blog_form) }}</div>
+  <div class="col-md-8 col-sm-12">
+    <h1>CARPE DIEM (SIEZE THE DAY)</h1>
+    <p>To help you get started here's a quote for the moment...</p>
+    <ul>
+      <li>{{quote.author}}</li>
+      <li>{{quote.quote}}</li>
+      <li>{{quote.permalink}}</li>
+    </ul>
+  </div>
+</div>
 {% endblock %}
-
-<ul>
-  <li>{{quote.author}}</li>
-  <li>{{quote.quote}}</li>
-  <li>{{quote.permalink}}</li>
-</ul>
