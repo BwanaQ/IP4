@@ -6,14 +6,14 @@
 
 ## Description
 
-This project is a Flask application that consumes the [News API](https://newsapi.org/) and displays various news sources, display trending articles and a link to the article.
-A live demo is deployed [Here](https://uhondosasa.herokuapp.com)
+This project is a Flask application that consumes a [Random quote base](http://quotes.stormconsultancy.co.uk/random.json) and allows users to login, create blogs and have them reviewed through comments and votes.
+A live demo is deployed [Here](https://hunja.herokuapp.com)
 
 ## User Stories
 
 The user would like to.... :
 
-- See various news sources
+- Log in
 - Select the ones they prefer
 - See the top news articles from that news source
 - See the image, description and time the news article was created
