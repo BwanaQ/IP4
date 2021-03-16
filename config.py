@@ -7,6 +7,7 @@ class Config:
     '''
     SECRET_KEY = os.environ.get('SECRET_KEY')
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://tom:y6t5r4e3w2q1@localhost/hunja'
+    UPLOADED_PHOTOS_DEST = 'app/static/photos'
 
 
 class ProdConfig(Config):
