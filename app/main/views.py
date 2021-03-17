@@ -5,7 +5,7 @@ from .forms import BlogForm, UpdateProfile
 from ..models import Blog, User
 from flask_login import login_required, current_user
 from .. import db, photos
-# Views
+from sqlalchemy import desc
 
 
 @main.route('/', methods=['GET', 'POST'])
@@ -18,19 +18,19 @@ def index():
     quote = get_quote()
     print(quote)
     form = BlogForm()
-    blogs = Blog.query.order_by(Blog.timestamp.desc())
+    blogs = Blog.query.order_by(desc(Blog.timestamp)).all()
     if form.validate_on_submit():
         title = form.title.data
         body = form.body.data
-        new_blog = Blog(title, body, user=current_user)
-        db.session.add(new_blog)
-        db.session.commit()
+        new_blog = Blog(title=title, body=body, user_id=current_user.id)
+        new_blog.save_blog()
 
         return redirect(url_for('main.index'))
     return render_template('index.html', title=title, quote=quote, blog_form=form, blogs=blogs)
 
 
-@main.route('/user/<uname>')
+@ main.route('/user/<uname>')
+@ login_required
 def profile(uname):
     user = User.query.filter_by(username=uname).first()
 
@@ -38,19 +38,10 @@ def profile(uname):
         abort(404)
 
     return render_template("profile/profile.html", user=user)
-# Views
 
 
-@main.route('/movie/<int:movie_id>')
-def movie(movie_id):
-    '''
-    View movie page function that returns the movie details page and its data
-    '''
-    return render_template('movie.html', id=movie_id)
-
-
-@main.route('/user/<uname>/update', methods=['GET', 'POST'])
-@login_required
+@ main.route('/user/<uname>/update', methods=['GET', 'POST'])
+@ login_required
 def update_profile(uname):
     user = User.query.filter_by(username=uname).first()
     if user is None:
@@ -67,8 +58,8 @@ def update_profile(uname):
         return redirect(url_for('.profile', uname=user.username))
 
 
-@main.route('/user/<uname>/update/pic', methods=['POST'])
-@login_required
+@ main.route('/user/<uname>/update/pic', methods=['POST'])
+@ login_required
 def update_pic(uname):
     user = User.query.filter_by(username=uname).first()
     if 'photo' in request.files:
