@@ -19,9 +19,11 @@
     />
   </head>
   <body>
-    <!-- Navbar block  -->
-    {% block navbar %} {% include 'navbar.html' %} {% endblock %}
-    <!-- Content block -->
-    {% block content %} {% endblock%}
+    <div class="container-fluid">
+      <!-- Navbar block  -->
+      {% block navbar %} {% include 'navbar.html' %} {% endblock %}
+      <!-- Content block -->
+      {% block content %} {% endblock%}
+    </div>
   </body>
 </html>

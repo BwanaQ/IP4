@@ -3,12 +3,12 @@ from . import main
 from ..request import get_quote
 from .forms import BlogForm, UpdateProfile
 from ..models import Blog, User
-from flask_login import login_required
+from flask_login import login_required, current_user
 from .. import db, photos
 # Views
 
 
-@main.route('/')
+@main.route('/', methods=['GET', 'POST'])
 @login_required
 def index():
     '''
@@ -17,16 +17,17 @@ def index():
     title = "Hunja | A personal blog"
     quote = get_quote()
     print(quote)
-
     form = BlogForm()
+    blogs = Blog.query.order_by(Blog.timestamp.desc())
     if form.validate_on_submit():
         title = form.title.data
-        quote = form.quote.data
-        author = form.author.data
-        new_blog = Blog(title, quote, author)
-        new_blog.save_blog()
+        body = form.body.data
+        new_blog = Blog(title, body, user=current_user)
+        db.session.add(new_blog)
+        db.session.commit()
+
         return redirect(url_for('main.index'))
-    return render_template('index.html', title=title, quote=quote, blog_form=form)
+    return render_template('index.html', title=title, quote=quote, blog_form=form, blogs=blogs)
 
 
 @main.route('/user/<uname>')

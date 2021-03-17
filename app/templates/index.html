@@ -1,15 +1,29 @@
 {% extends 'base.html'%} {% import "bootstrap/wtf.html" as wtf %} {%block
 content%}
 <div class="row">
-  <div class="col-md-4 col-sm-12">{{ wtf.quick_form(blog_form) }}</div>
+  <div class="col-md-12 col-sm-12 carpe">
+    <div class="fill-height">
+      <div id="hello" class="col-lg-10" style="text-align: center">
+        <h1>CARPE <span style="color: #f97300">DIEM</span></h1>
+        <p>To help you get started here's a quote for the moment...</p>
+        <p>{{ quote.quote }}</p>
+        <p>~ {{ quote.author }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<hr />
+<div class="row">
+  <div class="col-md-4 col-sm-12 mt-1">
+    <h2>Create Blog</h2>
+    {{ wtf.quick_form(blog_form) }}
+  </div>
   <div class="col-md-8 col-sm-12">
-    <h1>CARPE DIEM (SIEZE THE DAY)</h1>
-    <p>To help you get started here's a quote for the moment...</p>
-    <ul>
-      <li>{{quote.author}}</li>
-      <li>{{quote.quote}}</li>
-      <li>{{quote.permalink}}</li>
-    </ul>
+    <h2>Latest Posts</h2>
+    {% for blog in blogs %}
+    <h3>{{ blog.title }}</h3>
+    <p>{{ blog.body }}</p>
+    {% endfor%}
   </div>
 </div>
 {% endblock %}

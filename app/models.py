@@ -2,6 +2,7 @@ from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from . import login_manager
+from datetime import datetime
 
 
 @login_manager.user_loader
@@ -19,6 +20,7 @@ class User(UserMixin, db.Model):
     profile_pic_path = db.Column(db.String())
 
     pass_secure = db.Column(db.String(255))
+    blogs = db.relationship('Blog', backref='user', lazy="dynamic")
 
     @property
     def password(self):
@@ -46,11 +48,23 @@ class Role(db.Model):
         return f'User {self.name}'
 
 
-class Blog:
-    def __init__(self, id, title, body, author, timestamp, votes):
-        self.id = id
-        self.title = title
-        self.quote = quote
-        self.author = author
-        self.timestamp = timestamp
-        self.votes = votes
+class Blog(db.Model):
+    __tablename__ = 'blogs'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String)
+    body = db.Column(db.String)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def save_blog(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_blogs(cls, id):
+        blogs = Blog.query.filter_by(user_id=id).all()
+        return reviews
+
+
+class Comment:
+    pass
