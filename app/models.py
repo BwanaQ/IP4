@@ -21,6 +21,7 @@ class User(UserMixin, db.Model):
 
     pass_secure = db.Column(db.String(255))
     blogs = db.relationship('Blog', backref='user', lazy="dynamic")
+    comments = db.relationship('Comment', backref='commentor', lazy="dynamic")
 
     @property
     def password(self):
@@ -55,9 +56,14 @@ class Blog(db.Model):
     body = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    comments = db.relationship('Comment', backref='comments', lazy="dynamic")
 
     def save_blog(self):
         db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
         db.session.commit()
 
     @classmethod

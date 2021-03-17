@@ -2,10 +2,13 @@
 content%}
 <div class="row">
   <div class="col-md-12 col-sm-12 carpe">
-    <div class="fill-height">
+    <h1 class="text-center">CARPE <span style="color: #f97300">DIEM</span></h1>
+    <p class="text-center">
+      To help you get started here's a quote for the moment...
+    </p>
+
+    <div class="fill-height rounded">
       <div id="hello" class="col-lg-10" style="text-align: center">
-        <h1>CARPE <span style="color: #f97300">DIEM</span></h1>
-        <p>To help you get started here's a quote for the moment...</p>
         <p>{{ quote.quote }}</p>
         <p>~ {{ quote.author }}</p>
       </div>
@@ -27,6 +30,8 @@ content%}
       >Posted on {{moment(blog.timestamp).format('MMMM Do YYYY, h:mm:ss
       a')}}</small
     >
+
+    <hr />
     {% endfor%}
   </div>
 </div>
