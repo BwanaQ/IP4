@@ -23,6 +23,10 @@ content%}
     {% for blog in blogs %}
     <h3>{{ blog.title }}</h3>
     <p>{{ blog.body }}</p>
+    <small class="text-muted"
+      >Posted on {{moment(blog.timestamp).format('MMMM Do YYYY, h:mm:ss
+      a')}}</small
+    >
     {% endfor%}
   </div>
 </div>
