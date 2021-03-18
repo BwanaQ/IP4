@@ -126,4 +126,4 @@ def new_comment(blog_id):
 
         return redirect(url_for('main.new_comment', blog_id=blog_id))
 
-    return render_template('comments.html', form=form, comment=comment, blog_id=blog_id, blog=blog)
+    return render_template('comments.html', form=form, comments=comments, blog_id=blog_id, blog=blog)
