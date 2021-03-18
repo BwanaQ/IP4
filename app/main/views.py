@@ -121,7 +121,7 @@ def new_comment(blog_id):
         blog_id = blog_id
         user_id = current_user._get_current_object().id
         new_comment = Comment(
-            comments=comments, blog_id=blog_id, user_id=user_id)
+            comment=comment, blog_id=blog_id, user_id=user_id)
         new_comment.save_comment()
 
         return redirect(url_for('main.new_comment', blog_id=blog_id))
