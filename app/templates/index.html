@@ -24,13 +24,19 @@ content%}
   <div class="col-md-8 col-sm-12">
     <h2>Latest Posts</h2>
     {% for blog in blogs %}
-    <h3>{{ blog.title }}</h3>
-    <p>{{ blog.body }}</p>
-    <small class="text-muted"
-      >Posted on {{moment(blog.timestamp).format('MMMM Do YYYY, h:mm:ss
-      a')}}</small
-    >
-
+    <div class="blog-item">
+      <h3>{{ blog.title }}</h3>
+      <p>{{ blog.body }}</p>
+      <small class="text-muted"
+        >Posted on {{moment(blog.timestamp).format('MMMM Do YYYY, h:mm:ss a')}}
+        by
+        <a href="{{url_for('main.profile',uname=blog.user.username)}}"
+          >{{blog.user.username}} 
+        </a></small
+      >
+      <span >
+        <a href="#" class="btn btn-outline-primary btn-sm m-1">add comment</a>
+    </div>
     <hr />
     {% endfor%}
   </div>

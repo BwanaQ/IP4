@@ -26,6 +26,10 @@ class ProdConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
 
 
+class TestConfig(Config):
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://tom:y6t5r4e3w2q1@localhost/hunja_test'
+
+
 class DevConfig(Config):
     '''
     Development  configuration child class
@@ -40,5 +44,6 @@ class DevConfig(Config):
 
 config_options = {
     'development': DevConfig,
-    'production': ProdConfig
+    'production': ProdConfig,
+    'test': TestConfig
 }

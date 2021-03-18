@@ -19,36 +19,23 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
-        <ul class="nav navbar-nav navbar-right">
-          {% if current_user.is_authenticated %}
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdownMenuLink"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              {{current_user.username}}
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a
-                class="dropdown-item"
-                href="{{url_for('main.profile',uname=current_user.username)}}"
-                >Profile</a
-              >
-              <a class="dropdown-item" href="{{url_for('auth.logout')}}"
-                >Sign out</a
-              >
-            </div>
-          </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{url_for('auth.login')}}">Sign in</a>
-          </li>
-          {%endif%}
-        </ul>
+        {% if current_user.is_authenticated %}
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="{{url_for('main.profile',uname=current_user.username)}}"
+            >My Profile</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('auth.logout')}}">Logout</a>
+        </li>
+
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('auth.login')}}">Sign in</a>
+        </li>
+        {%endif%}
       </ul>
     </div>
   </div>

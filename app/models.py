@@ -78,6 +78,7 @@ class Comment(db.Model):
     comment = db.Column(db.Text(), nullable=False)
     blog_id = db.Column(db.Integer, db.ForeignKey('blogs.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
     def save_comment(self):
         db.session.add(self)
@@ -87,6 +88,9 @@ class Comment(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+    def __repr__(self):
+        return f'Blog {self.title}'
+
     @classmethod
     def get_comments(cls, blog_id):
         comments = Comment.query.filter_by(blog_id=blog_id).all()
@@ -94,4 +98,4 @@ class Comment(db.Model):
         return comments
 
     def __repr__(self):
-        return f'Comment{self.comments}'
+        return f'Comment{self.comment}'

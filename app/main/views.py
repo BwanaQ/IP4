@@ -1,8 +1,8 @@
 from flask import render_template, request, redirect, url_for
 from . import main
 from ..request import get_quote
-from .forms import BlogForm, UpdateProfile
-from ..models import Blog, User
+from .forms import BlogForm, UpdateProfile, CommentForm
+from ..models import Blog, User, Comment, Role
 from flask_login import login_required, current_user
 from .. import db, photos
 from sqlalchemy import desc
@@ -69,3 +69,23 @@ def update_pic(uname):
         db.session.commit()
     return redirect(url_for('main.profile', uname=uname))
     return render_template('profile/update.html', form=form)
+
+
+@main.route('/comments/<int:blog_id>', methods=['GET', 'POST'])
+@login_required
+def new_comment(blog_id):
+    blog = Blog.query.get(blog_id)
+    comments = Comment.query.filter_by(
+        blog_id=blog_id).order_by(desc(Comment.timestamp)).all()
+    form = CommentForm()
+    if form.validate_on_submit():
+        comment = form.comment.data
+        blog_id = blog_id
+        user_id = current_user._get_current_object().id
+        new_comment = Comment(
+            comments=comments, blog_id=blog_id, user_id=user_id)
+        new_comment.save_comment()
+
+        return redirect(url_for('main.new_comment', blog_id=blog_id))
+
+    return render_template('comments.html', form=form, comment=comment, blog_id=blog_id, blog=blog)
