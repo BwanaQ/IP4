@@ -18,11 +18,11 @@ content%}
 <hr />
 <div class="row">
   <div class="col-md-4 col-sm-12 mt-1">
-    <h2>Create Blog</h2>
+    <h2 class="text-center">Create Blog</h2>
     {{ wtf.quick_form(blog_form) }}
   </div>
   <div class="col-md-8 col-sm-12">
-    <h2>Latest Posts</h2>
+    <h2 class="text-center">Latest Posts</h2>
     {% for blog in blogs %}
     <div class="blog-item">
       <h3>{{ blog.title }}</h3>
@@ -31,11 +31,20 @@ content%}
         >Posted on {{moment(blog.timestamp).format('MMMM Do YYYY, h:mm:ss a')}}
         by
         <a href="{{url_for('main.profile',uname=blog.user.username)}}"
-          >{{blog.user.username}} 
+          >{{blog.user.username}}
         </a></small
       >
-      <span >
-        <a href="#" class="btn btn-outline-primary btn-sm m-1">add comment</a>
+      <span class="m-1">
+        <a href="#" class="btn btn-outline-primary btn-sm">add comment</a>
+      </span>
+      {% if blog.user == current_user %}
+      <span class="m-1">
+        <a href="#" class="btn btn-outline-success btn-sm">edit post</a>
+      </span>
+      <span class="m-1">
+        <a href="#" class="btn btn-outline-danger btn-sm">delete post</a>
+      </span>
+      {% endif %}
     </div>
     <hr />
     {% endfor%}
