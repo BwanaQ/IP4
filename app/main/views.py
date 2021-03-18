@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
 from . import main
 from ..request import get_quote
 from .forms import BlogForm, UpdateProfile, CommentForm
@@ -27,6 +27,44 @@ def index():
 
         return redirect(url_for('main.index'))
     return render_template('index.html', title=title, quote=quote, blog_form=form, blogs=blogs)
+
+
+@main.route('/blogs/<int:blog_id>/delete', methods=['GET', 'POST'])
+@login_required
+def delete_blog(blog_id):
+    quote = get_quote()
+    blogs = Blog.query.order_by(desc(Blog.timestamp)).all()
+    blog = Blog.query.get(blog_id)
+    if blog.user != current_user:
+        abort(403)
+
+    Blog.delete(blog)
+
+    return redirect(url_for('.index', quote=quote, blog=blog, blogs=blogs))
+
+
+@main.route('/blog/<blog_id>/update', methods=['GET', 'POST'])
+@login_required
+def update_blog(blog_id):
+    blog = Blog.query.get(blog_id)
+    if blog.user != current_user:
+        abort(403)
+
+    form = BlogForm()
+    if form.validate_on_submit():
+        blog.title = form.title.data
+        blog.body = form.body.data
+        db.session.commit()
+
+        flash('You have updated your Blog!', 'success')
+
+        return redirect(url_for('main.index', id=blog.id))
+
+    if request.method == 'GET':
+        form.title.data = blog.title
+        form.body.data = blog.body
+
+    return render_template('blogs.html', form=form, legend='Update Blog')
 
 
 @ main.route('/user/<uname>')

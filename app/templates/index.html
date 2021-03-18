@@ -35,14 +35,26 @@ content%}
         </a></small
       >
       <span class="m-1">
-        <a href="#" class="btn btn-outline-primary btn-sm">add comment</a>
+        <a
+          href="{{url_for('main.new_comment', blog_id=blog.id)}}"
+          class="btn btn-outline-primary btn-sm"
+          >add comment</a
+        >
       </span>
       {% if blog.user == current_user %}
       <span class="m-1">
-        <a href="#" class="btn btn-outline-success btn-sm">edit post</a>
+        <a
+          href="{{url_for('main.update_blog', blog_id=blog.id)}}"
+          class="btn btn-outline-success btn-sm"
+          >Update</a
+        >
       </span>
       <span class="m-1">
-        <a href="#" class="btn btn-outline-danger btn-sm">delete post</a>
+        <a
+          href="{{url_for('main.delete_blog', blog_id=blog.id)}}"
+          class="btn btn-outline-danger btn-sm"
+          >Delete</a
+        >
       </span>
       {% endif %}
     </div>
