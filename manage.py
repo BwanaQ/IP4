@@ -4,12 +4,12 @@ from app.models import User, Role, Blog, Comment
 from flask_migrate import Migrate, MigrateCommand
 from flask_moment import Moment
 
-app = create_app('development')
+app = create_app('production')
 
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 manager.add_command('server', Server)
-#migrate = Migrate(app, db)
+migrate = Migrate(app, db)
 moment = Moment(app)
 
 
