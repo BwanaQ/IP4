@@ -60,20 +60,20 @@ The user would like to.... :
 
 ## Behaviour Driven Development
 
-| Behaviour | Input | Output |
-| Behaviour | Input | Output |
-| :---------------- | :---------------: | ------------------: |
-| Display news sources | **On page load** | List of various news sources is displayed in cards |
-| Display articles from a news source | **Click a news source** | Redirected to a page with articles from the source |
-| Display the preview of an article | **On page load** | Each article displays an image,description and publication date |
-| To Read an entire article | **Click an article** | Redirected to the news source's site to read the entire article |
+| Behaviour             |                Input                |                                                                                           Output |
+| :-------------------- | :---------------------------------: | -----------------------------------------------------------------------------------------------: |
+| Load the page         |          **On page load**           |                                                   Get all blogs, Select between signup and login |
+| Select SignUp         | **Email**,**Username**,**Password** |                                                                                Redirect to login |
+| Select Login          |    **Username** and **password**    | Redirect to page with blogs that have been posted by writes and be able to subscribe to the blog |
+| Select comment button |             **Comment**             |                                                                 Form that you input your comment |
+| Click on submit       |                                     |                           Redirect to all comments tamplate with your comment and other comments |
+| Subscription          |          **Email Address**          |                                                 Flash message "Succesfully subsbribed to D-Blog" |
 
 ## Technologies Used
 
 - python3.6
 - Flask
 - Bootstrap
-
 
 ## Known Bugs
 
