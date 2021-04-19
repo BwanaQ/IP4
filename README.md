@@ -77,7 +77,7 @@ The user would like to.... :
 
 ## Known Bugs
 
-- There are no known bugs currently but pull requests are allowed incase you spot a bug
+- Removed Email functionality as it was breaking the appduring registration
 
 ## Contact Information
 
