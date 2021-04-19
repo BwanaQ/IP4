@@ -7,7 +7,7 @@
 ## Description
 
 This project is a Flask application that consumes a [Random quote base](http://quotes.stormconsultancy.co.uk/random.json) and allows users to login, create blogs and have them reviewed through comments and votes.
-A live demo is deployed [Here](https://hunja.herokuapp.com)
+A live demo is deployed [Here](https://blog-hunja.herokuapp.com/)
 
 ## User Stories
 
